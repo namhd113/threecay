@@ -19,6 +19,14 @@
             height: 20%;
             width: 20%;
         }
+
+        body {
+            background-image: url('images/dylan-clifton-wFln-loyVxY-unsplash.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
     </style>
     <script src="3cay.js"></script>
 
@@ -28,9 +36,9 @@
 
 <br>
 <div>
-    <h3>Nhập tên người chơi:</h3> <input type="text" id="player2">
+    <h3 style="color:red;">Nhập tên người chơi:</h3> <input type="text" id="player2">
     <br>
-    <h3>Đặt cược</h3>
+    <h3 style="color:red;">Đặt cược</h3>
     <select id="bet">
         <option value="5">5k</option>
         <option value="10">10k</option>
@@ -40,27 +48,27 @@
     <br>
     <br>
 
-    <img class="one" src="images/down-card.jpg" id="1" width="300px" height="350px">
-    <img class="two" src="images/down-card.jpg" id="2" width="300px" height="350px">
-    <img class="three" src="images/down-card.jpg" id="3" width="300px" height="350px">
+    <img class="one" src="images/down-card.png" id="1" width="300px" height="350px">
+    <img class="two" src="images/down-card.png" id="2" width="300px" height="350px">
+    <img class="three" src="images/down-card.png" id="3" width="300px" height="350px">
 
     <br>
     <button onclick="choi3cay()"><h1>Chia bài nhé</h1></button>
-    <h1 id="playeroutput"></h1>
+    <h1 style="color:red;" id="playeroutput"></h1>
 
-    <img class="one" src="images/down-card.jpg" id="4" width="300px" height="350px">
-    <img class="two" src="images/down-card.jpg" id="5" width="300px" height="350px">
-    <img class="three" src="images/down-card.jpg" id="6" width="300px" height="350px">
+    <img class="one" src="images/down-card.png" id="4" width="300px" height="350px">
+    <img class="two" src="images/down-card.png" id="5" width="300px" height="350px">
+    <img class="three" src="images/down-card.png" id="6" width="300px" height="350px">
     <br>
     <button onclick="chucai()"><h1>Đến lượt chủ cái!!!</h1></button>
 
-    <h1 id="chucaioutput"></h1>
+    <h1 style="color:#0000ff;" id="chucaioutput"></h1>
     <br>
     <h3>
-        <p id="res"></p>
-        <p id="res2"></p>
-        <p id="res1"></p>
-        <p id="bet_res"></p>
+        <p style="color:#009933;" id="res"></p>
+        <p style="color:#009933;" id="res2"></p>
+        <p style="color:#009933;"id="res1"></p>
+        <p style="color:#009933;" id="bet_res"></p>
     </h3>
     <br>
 
