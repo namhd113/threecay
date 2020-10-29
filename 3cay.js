@@ -26,9 +26,8 @@ class PLay3cay {
         if (rd1 == rdi && rd2 == rdj) {
             return this.selectCard(rdi, rdj);
         }
-        this.listSelect.push(rdi + "," + rdj);
 
-        console.log(this.listSelect);
+        this.listSelect.push(rdi + "," + rdj);
 
         return [arr[rdi][rdj], rdi, rdj];
     }
@@ -49,10 +48,22 @@ class PLay3cay {
         this.list.push(c);
     }
 
-    get3Bai() {
+    get3Bai(arr) {
         let a = this.selectCard();
         let b = this.selectCard(a[1], a[2]);
         let c = this.selectCard(b[1], b[2], a[1], a[2]);
+
+        if (this.name == "Chủ cái") {
+            if (this.checkDup(a[1], a[2], arr)) {
+                a = this.selectCard();
+            }
+            if (this.checkDup(b[1], b[2], arr)) {
+                b = this.selectCard(a[1], a[2]);
+            }
+            if (this.checkDup(c[1], c[2], arr)) {
+                c = this.selectCard(b[1], b[2], a[1], a[2]);
+            }
+        }
 
         let a1 = +(a[0].substr(a[0].length - 5)[0]);
         let b1 = +(b[0].substr(b[0].length - 5)[0]);
@@ -108,7 +119,7 @@ function chucai() {
     }
 
     let chuNhaplay = new PLay3cay("Chủ cái");
-    let diemChucai = chuNhaplay.get3Bai();
+    let diemChucai = chuNhaplay.get3Bai(play2.listSelect);
 
     document.getElementById("chucaioutput").innerHTML = "Điểm của " + chuNhaplay.name + " là: " + diemChucai + " (" + chuNhaplay.list + ")";
 
