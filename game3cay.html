@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<div>
+    Nhập tên người chơi thứ 1: <input type="text" id="player1">
+    <br>
+    Nhập tên người chơi thứ 2: <input type="text" id="player2">
+    <br>
+    <button onclick="choi3cay()">Chia bài nhé</button>
+    <p id="res"></p>
+    <p id="res1"></p>
+    <p id="res2"></p>
+
+    <h3>Danh sách điểm chơi cũ</h3>
+    <p id="oldpoint"></p>
+
+</div>
+
+<script>
+
+    class PLay3cay {
+        constructor(name) {
+            this.name = name;
+            this.list = [];
+        }
+
+        get3Bai() {
+            let a = this.getRndInteger();
+            let b = this.getRndInteger();
+            let c = this.getRndInteger();
+            let total = a + b + c;
+            if (total <= 10) {
+                return total;
+            } else {
+                let lastDiem = parseInt(total.toString().charAt(1));
+                if (lastDiem == 0) return 10;
+                else return lastDiem;
+            }
+        }
+
+        getRndInteger() {
+            return Math.floor(Math.random() * (9)) + 1;
+        }
+
+
+    }
+
+    function choi3cay() {
+        let name1 = document.getElementById("player1").value;
+        let name2 = document.getElementById("player2").value;
+
+        let play1 = new PLay3cay(name1);
+        let play2 = new PLay3cay(name2);
+
+        let diem1 = play1.get3Bai();
+        let diem2 = play2.get3Bai();
+
+        if (diem1 > diem2) {
+            document.getElementById("res").innerHTML = play1.name + " thắng rồi !!!";
+            document.getElementById("res1").innerHTML = "Điểm của " + play1.name + " là: " + diem1;
+            document.getElementById("res2").innerHTML = "Điểm của " + play2.name + " là: " + diem2;
+        }
+        if (diem1 < diem2) {
+            document.getElementById("res").innerHTML = play2.name + " thắng rồi !!!";
+            document.getElementById("res1").innerHTML = "Điểm của " + play1.name + " là: " + diem1;
+            document.getElementById("res2").innerHTML = "Điểm của " + play2.name + " là: " + diem2;
+        }
+        if (diem1 == diem2) {
+            document.getElementById("res").innerHTML = "Hoà rồi";
+            document.getElementById("res1").innerHTML = "Điểm của " + play1.name + " là: " + diem1;
+            document.getElementById("res2").innerHTML = "Điểm của " + play2.name + " là: " + diem2;
+        }
+
+    }       // cho hien thi len hinh anh 3 quan bai se duoc chon
+
+
+</script>
+
+
+</body>
+</html>
