@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+   let cardtype = ["clubs", "spades", "diamonds", "hearts"];
+   let number = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  /// console.log(cardtype);
+  // console.log(number);
+
+   let str = "hearts_9.png";
+   let fastFive = str.substr(str.length-5);// 9.png
+   var lastNum = fastFive[0];
+
+   console.log(lastNum);
+
+
+
+   let newArr = [["clubs-1.png", "clubs-2.png", "clubs-3.png"],
+       ["spades-1.png", "spades-2.png", "spades-3.png"],
+       ["diamonds-1.png", "diamonds-2.png", "diamonds-3.png"],
+       ["hearts-1.png", "hearts-2.png", "hearts-3.png"]]
+   //console.log(newArr);
+
+   function selectRandom(items) {
+       var item = items[Math.floor(Math.random() * items.length)];
+       return item;
+   }
+
+   function getRndInteger() {
+       return Math.floor(Math.random() * (9)) + 1;
+   }
+   function getRandomArbitrary(min, max) {
+       return Math.floor(Math.random() * (max - min)) + min;
+   }
+
+
+
+   let arr = [];
+   for (let i = 0; i < cardtype.length; i++) {
+       // arr[i] = new Array(number.length);
+       // for (let j = 0; j < number.length; j++) {
+       //    arr[i][j] = cardtype[i] + number[j] + "png";
+       // }
+       //console.log(getRandomArbitrary(0, cardtype.length));
+   }
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
