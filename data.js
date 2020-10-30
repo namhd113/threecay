@@ -12,6 +12,7 @@ function loadData(m) {
 
 function resetMoney() {
     //localStorage.clear();
-    localStorage.removeItem('money');
+    //localStorage.removeItem('money');
+    localStorage.setItem('money', 500);
     alert("Money reset to 500k.")
 }
