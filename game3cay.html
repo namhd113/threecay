@@ -55,11 +55,10 @@
     <button onclick="reset3cay()">Reset lá bài</button>
     <h3 style="color:red;">Đặt cược</h3>
     <select id="bet">
-        <option value="5">5k</option>
         <option value="10">10k</option>
         <option value="20">20k</option>
         <option value="100">100k</option>
-        <option value="200">200k</option>
+        <option value="500">500k</option>
     </select>
     <br>
 <!--    <h3 style="color:red;" id="vonbandau"></h3>-->
@@ -82,9 +81,7 @@
     <button onclick="chucai()"><h3>Chủ cái mở bài.</h3></button>
 
     <h1 style="color:#ffff66;" id="chucaioutput"></h1>
-</div>
 
-<div>
     <h3>
         <p style="color:#ccffcc;" id="res"></p>
         <p style="color:#ccffcc;" id="res2"></p>
@@ -97,7 +94,7 @@
 <br>
 <br>
 <script>
-    document.getElementById("VonDau").innerHTML = "Vốn ban đầu: " + loadData() + "k";
+    document.getElementById("VonDau").innerHTML = "Vốn ban đầu: " + loadData(500) + "k";
 
 </script>
 

@@ -29,7 +29,9 @@ function chucai() {
         alert("Người chơi cần mở bài trước.");
         return;
     }
-
+    if (play2.lostMoney() < 0) {
+        alert("Bạn hết tiền rồi!!!.")
+    }
     let chuNhaplay = new PLay3cay("Chủ cái");
     let diemChucai = chuNhaplay.get3Bai(play2.listSelect);
 
@@ -40,9 +42,7 @@ function chucai() {
         //document.getElementById("res1").innerHTML = "Điểm của " + chuNhaplay.name + " là: " + diemChucai + " (" + chuNhaplay.list + ")";
         //document.getElementById("res2").innerHTML = "Điểm của " + play2.name + " là: " + diem2 + " (" + play2.list + ")";
         document.getElementById("bet_res").innerHTML = "Bạn đặt cược " + play2.bet + "k. Số tiền còn lại là: " + play2.lostMoney() + "k";
-        if (play2.lostMoney() < 0) {
-            alert("Bạn hết tiền rồi!!!.")
-        }
+
     }
     if (diemChucai < diem2) {
         document.getElementById("res").innerHTML = play2.name + " thắng rồi !!!";
