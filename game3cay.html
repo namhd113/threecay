@@ -5,19 +5,23 @@
     <title>Title</title>
 
     <style>
+        div {
+            display: inline-block;
+        }
+
         img.one {
-            height: 20%;
-            width: 20%;
+            height: 10%;
+            width: 10%;
         }
 
         img.two {
-            height: 20%;
-            width: 20%;
+            height: 10%;
+            width: 10%;
         }
 
         img.three {
-            height: 20%;
-            width: 20%;
+            height: 10%;
+            width: 10%;
         }
 
         body {
@@ -36,7 +40,9 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+    <script src="data.js"></script>
     <script src="3cay.js"></script>
+    <script src="play3cay.js"></script>
 
 </head>
 <body>
@@ -45,15 +51,18 @@
 <br>
 <div>
     <h3 style="color:red;">Nhập tên người chơi:</h3> <input type="text" id="player2">
-    <br>
+    <button onclick="resetMoney()">Reset tiền chơi</button>
     <h3 style="color:red;">Đặt cược</h3>
     <select id="bet">
         <option value="5">5k</option>
         <option value="10">10k</option>
         <option value="20">20k</option>
         <option value="100">100k</option>
+        <option value="200">200k</option>
     </select>
     <br>
+<!--    <h3 style="color:red;" id="vonbandau"></h3>-->
+    <h3 style="color:red;" id="VonDau"></h3>
     <br>
 
     <img class="one" src="images/down-card.png" id="1" width="300px" height="350px">
@@ -61,27 +70,36 @@
     <img class="three" src="images/down-card.png" id="3" width="300px" height="350px">
 
     <br>
-    <button onclick="choi3cay()"><h1>Chia bài nhé</h1></button>
+
+    <button onclick="choi3cay()"><h3>Mở bài.</h3></button>
     <h1 style="color:red;" id="playeroutput"></h1>
 
     <img class="one" src="images/down-card.png" id="4" width="300px" height="350px">
     <img class="two" src="images/down-card.png" id="5" width="300px" height="350px">
     <img class="three" src="images/down-card.png" id="6" width="300px" height="350px">
     <br>
-    <button onclick="chucai()"><h1>Đến lượt chủ cái!!!</h1></button>
+    <button onclick="chucai()"><h3>Chủ cái mở bài.</h3></button>
 
-    <h1 style="color:#0000ff;" id="chucaioutput"></h1>
-    <br>
-    <h3>
-        <p style="color:#009933;" id="res"></p>
-        <p style="color:#009933;" id="res2"></p>
-        <p style="color:#009933;"id="res1"></p>
-        <p style="color:#009933;" id="bet_res"></p>
-    </h3>
-    <br>
-
-    <br>
+    <h1 style="color:#ffff66;" id="chucaioutput"></h1>
 </div>
+
+<div>
+    <h3>
+        <p style="color:#ccffcc;" id="res"></p>
+        <p style="color:#ccffcc;" id="res2"></p>
+        <p style="color:#ccffcc;" id="res1"></p>
+        <p style="color:#ccffcc;" id="bet_res"></p>
+    </h3>
+
+</div>
+<br>
+<br>
+<br>
+<script>
+    document.getElementById("VonDau").innerHTML = "Vốn ban đầu: " + loadData() + "k";
+
+</script>
+
 
 </body>
 </html>
