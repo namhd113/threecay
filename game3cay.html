@@ -5,7 +5,6 @@
     <title>Title</title>
 
     <style>
-
         img.one {
             height: 10%;
             width: 10%;
@@ -27,8 +26,11 @@
             background-attachment: fixed;
             background-size: cover;
         }
-
     </style>
+
+    <script src="js/data.js"></script>
+    <script src="js/play3card.js"></script>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -39,47 +41,177 @@
 <body>
 
 <div>
-    <h3 style="color:red;">Nhập tên người chơi:</h3> <input type="text" id="playerName">
+    <p style="color:red;">Nhập tên người chơi:</p> <input type="text" id="playerName" onchange="setName()">
     <button onclick="resetMoney(500)">Reset tiền chơi</button>
     <button onclick="reset3cay()">Reset lá bài</button>
-    <h3 style="color:red;">Đặt cược</h3>
-    <select id="bet">
+    <p style="color:red;">Đặt cược</p>
+    <select id="bet" onchange="setBet()">
         <option value="10">10k</option>
         <option value="20">20k</option>
         <option value="100" selected>100k</option>
+        <option value="200">200k</option>
         <option value="500">500k</option>
     </select>
-    <br>
-    <h3 style="color:red;" id="VonDau"></h3>
-    <br>
+    <p style="color:red;" id="VonDau"></p>
 
     <img class="one" src="images/down-card.png" id="1" width="300px" height="350px">
     <img class="two" src="images/down-card.png" id="2" width="300px" height="350px">
     <img class="three" src="images/down-card.png" id="3" width="300px" height="350px">
-
-    <br>
-
-    <button onclick="choi3cay()"><h3>Mở bài.</h3></button>
-    <h1 style="color:red;" id="playeroutput"></h1>
+    <button onclick="Open3Card()"><h4>Mở bài.</h4></button>
+    <h3 style="color:red;" id="playerOutPut"></h3>
 
     <img class="one" src="images/down-card.png" id="4" width="300px" height="350px">
     <img class="two" src="images/down-card.png" id="5" width="300px" height="350px">
     <img class="three" src="images/down-card.png" id="6" width="300px" height="350px">
-    <br>
-    <button onclick="chucai()"><h3>Chủ cái mở bài.</h3></button>
-
-    <h1 style="color:#ffff66;" id="chucaioutput"></h1>
-
-    <h3>
-        <p style="color:#ccffcc;" id="res"></p>
-        <p style="color:#ccffcc;" id="bet_res"></p>
-    </h3>
+    <button onclick="Master()"><h4>Chủ cái mở bài.</h4></button>
+    <h3 style="color:#ffff66;" id="chuCaiOutPut"></h3>
 
 </div>
 
-<script src="data.js"></script>
-<script src="play3cay.js"></script>
-<script src="3cay.js"></script>
+<div>
+    <p style="color:#ccffcc;" id="res"></p>
+    <p style="color:#ccffcc;" id="bet_res"></p>
+</div>
+
+<script>
+    var bet = document.getElementById("bet").value;
+    if (bet == loadOldData('bet')) {
+        saveOldData("bet", bet);
+    }
+    if (bet != loadOldData('bet')) {
+        document.getElementById("bet").value = loadOldData("bet");
+    }
+    var playerName = document.getElementById("playerName").value;
+    if (playerName == loadOldData('playerName')) {
+        saveOldData("playerName", playerName);
+    }
+    if (playerName != loadOldData('playerName')) {
+        document.getElementById("playerName").value = loadOldData("playerName");
+    }
+
+    document.getElementById("VonDau").innerHTML = "Vốn ban đầu của " + loadOldData("playername") + " là: " + loadData(500) + "k";
+    var diemPlayer = '';
+    var player = new PLay3Card(loadOldData('playername'), loadOldData('bet'), loadData(500));
+
+    if (!loadOldData('diemchucai') && loadOldData('diemplayer')) {
+        diemPlayer = loadOldData('diemplayer');
+        sleep(1000).then(() => {
+            document.getElementById("playerOutPut").innerHTML = "Điểm của " + loadOldData('playername') + " là: " + diemPlayer + " (" + JSON.parse(loadOldData("diemlist_card")) + ")";
+        });
+        var listSelect = JSON.parse(loadOldData("diemplayer_card"));
+        for (let i = 0; i < listSelect.length; i++) {
+            document.getElementById(i + 1).src = player.selectCardbyID(listSelect[i].split(",")[0], listSelect[i].split(",")[1]);
+        }
+    }
+
+    function Open3Card() {
+        if (loadData(500) < loadOldData('bet')) {
+            alert("Bạn không đủ tiền đặt cược, không thể chơi tiếp.");
+            return;
+        }
+
+        if (loadData(500) <= 0) {
+            alert("Bạn hết tiền rồi, không thể chơi tiếp.");
+            return;
+        }
+        if (!loadOldData('diemchucai') && loadOldData('diemplayer')) {
+            alert("Đến lượt chủ cái mở bài.");
+            return;
+        }
+
+        reset3cay();
+        player = new PLay3Card(loadOldData('playername'), loadOldData('bet'), loadData(500));
+        diemPlayer = player.get3Card();
+        saveOldData("diemplayer", diemPlayer);
+        saveOldData("diemplayer_card", JSON.stringify(player.listSelect));
+        saveOldData("diemlist_card", JSON.stringify(player.list));
+
+        document.getElementById("VonDau").innerHTML = "Vốn ban đầu của " + player.name + " là: " + player.money + "k";
+        sleep(6000).then(() => {
+            document.getElementById("playerOutPut").innerHTML = "Điểm của " + player.name + " là: " + diemPlayer + " (" + player.list + ")";
+        });
+    }
+
+    function sleep(time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+    function setBet() {
+        if (loadOldData('diemplayer')) {
+            document.getElementById("bet").value = loadOldData("bet");
+            alert("Bạn đã mở bài, không thể thay đổi tiền cược.");
+            return;
+        }
+        saveOldData("bet", document.getElementById("bet").value);
+    }
+
+    function setName() {
+        saveOldData("playername", document.getElementById("playerName").value);
+    }
+
+    function Master() {
+
+        if (!diemPlayer) {
+            alert("Người chơi cần mở bài trước.");
+            return;
+        }
+        if (!loadOldData('diemchucai') && !loadOldData('diemplayer')) {
+            alert("Người chơi cần mở bài trước.");
+            return;
+        }
+        if (loadData(500) <= 0) {
+            alert("Bạn hết tiền rồi!!!.");
+            return;
+        }
+
+        let MasterPlay = new PLay3Card("Chủ cái");
+        let diemMaster = MasterPlay.get3Card(player.listSelect ? player.listSelect : listSelect);
+        saveOldData("diemchucai", diemMaster);
+        sleep(6000).then(() => {
+            document.getElementById("chuCaiOutPut").innerHTML = "Điểm của " + MasterPlay.name + " là: " + diemMaster + " (" + MasterPlay.list + ")";
+        });
+
+        removeLocal("diemplayer");
+        removeLocal("diemchucai");
+        removeLocal("diemplayer_card");
+        removeLocal("diemlist_card");
+
+        if (diemMaster > diemPlayer) {
+            sleep(6000).then(() => {
+                document.getElementById("res").innerHTML = MasterPlay.name + " thắng rồi !!!";
+                document.getElementById("bet_res").innerHTML = "Bạn đặt cược " + player.bet + "k. Số tiền còn lại là: " + player.lostMoney() + "k";
+            });
+        }
+        if (diemMaster < diemPlayer) {
+            sleep(6000).then(() => {
+                document.getElementById("res").innerHTML = player.name + " thắng rồi !!!";
+                document.getElementById("bet_res").innerHTML = "Bạn đặt cược " + player.bet + "k. Số tiền còn lại là: " + player.winMoney() + "k";
+            });
+        }
+        if (diemMaster == diemPlayer) {
+            sleep(6000).then(() => {
+                document.getElementById("res").innerHTML = "Hoà rồi";
+                document.getElementById("bet_res").innerHTML = "Bạn không mất thêm gi cả.";
+            });
+        }
+    }
+
+    function reset3cay() {
+        document.getElementById("VonDau").innerHTML = "Vốn ban đầu của " + loadOldData("playername") + " là: " + loadData(500) + "k";
+        document.getElementById(1).src = "images/down-card.png";
+        document.getElementById(2).src = "images/down-card.png";
+        document.getElementById(3).src = "images/down-card.png";
+        document.getElementById(4).src = "images/down-card.png";
+        document.getElementById(5).src = "images/down-card.png";
+        document.getElementById(6).src = "images/down-card.png";
+        document.getElementById("res").innerHTML = "";
+        document.getElementById("bet_res").innerHTML = "";
+        document.getElementById("chuCaiOutPut").innerHTML = "";
+        document.getElementById("playerOutPut").innerHTML = "";
+    }
+
+</script>
+
 
 </body>
 </html>

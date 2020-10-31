@@ -1,4 +1,4 @@
-class PLay3cay {
+class PLay3Card {
     constructor(name, bet, money) {
         this.name = name;
         this.name = this.name ? this.name : "Bạn";
@@ -10,6 +10,17 @@ class PLay3cay {
         this.number = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     }
 
+    selectCardbyID(a, b) {
+        let arr = [];
+        for (let i = 0; i < this.cardtype.length; i++) {
+            arr[i] = new Array(this.number.length);
+            for (let j = 0; j < this.number.length; j++) {
+                arr[i][j] = "images/" + this.cardtype[i] + "_" + this.number[j] + ".png";
+            }
+        }
+        return arr[a][b];
+    }
+
     selectCard(rdb, rdc, rd1, rd2) {
         let arr = [];
         for (let i = 0; i < this.cardtype.length; i++) {
@@ -19,8 +30,8 @@ class PLay3cay {
             }
         }
 
-        let rdi = this.getRandomArbitrary(0, this.cardtype.length);
-        let rdj = this.getRandomArbitrary(0, this.number.length);
+        let rdi = this.getRandom(0, this.cardtype.length);
+        let rdj = this.getRandom(0, this.number.length);
         if (rdb == rdi && rdc == rdj) {
             return this.selectCard(rdi, rdj);
         }
@@ -31,7 +42,7 @@ class PLay3cay {
         return [arr[rdi][rdj], rdi, rdj];
     }
 
-    checkDup(a, b, arr) {
+    checkDupCard(a, b, arr) {
         let dup = a + "," + b;
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] == dup) {
@@ -42,24 +53,22 @@ class PLay3cay {
     }
 
     getlist(a, b, c) {
-        this.list.push(a);
-        this.list.push(b);
-        this.list.push(c);
+        this.list = [a, b, c];
     }
 
-    get3Bai(arr) {
+    get3Card(arr) {
         let a = this.selectCard();
         let b = this.selectCard(a[1], a[2]);
         let c = this.selectCard(b[1], b[2], a[1], a[2]);
 
         if (this.name == "Chủ cái") {
-            if (this.checkDup(a[1], a[2], arr)) {
+            if (this.checkDupCard(a[1], a[2], arr)) {
                 a = this.selectCard();
             }
-            if (this.checkDup(b[1], b[2], arr)) {
+            if (this.checkDupCard(b[1], b[2], arr)) {
                 b = this.selectCard(a[1], a[2]);
             }
-            if (this.checkDup(c[1], c[2], arr)) {
+            if (this.checkDupCard(c[1], c[2], arr)) {
                 c = this.selectCard(b[1], b[2], a[1], a[2]);
             }
         }
@@ -81,15 +90,18 @@ class PLay3cay {
         }
     }
 
-    getRandomArbitrary(min, max) {
+    getRandom(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
     changeImg(a, b, c) {
         if (this.name == "Chủ cái") {
-            sleep(500).then(() => {
+            this.randomCard(4);
+            sleep(1000).then(() => {
+                this.randomCard(5);
                 document.getElementById(4).src = a;
-                sleep(1000).then(() => {
+                sleep(2000).then(() => {
+                    this.randomCard(6);
                     document.getElementById(5).src = b;
                     sleep(1000).then(() => {
                         document.getElementById(6).src = c;
@@ -97,9 +109,12 @@ class PLay3cay {
                 });
             });
         } else {
-            sleep(500).then(() => {
+            this.randomCard(1);
+            sleep(1000).then(() => {
+                this.randomCard(2);
                 document.getElementById(1).src = a;
-                sleep(1000).then(() => {
+                sleep(2000).then(() => {
+                    this.randomCard(3);
                     document.getElementById(2).src = b;
                     sleep(1000).then(() => {
                         document.getElementById(3).src = c;
@@ -109,6 +124,39 @@ class PLay3cay {
         }
     }
 
+    selectRandomCard() {
+        let arr = [];
+        for (let i = 0; i < this.cardtype.length; i++) {
+            arr[i] = new Array(this.number.length);
+            for (let j = 0; j < this.number.length; j++) {
+                arr[i][j] = "images/" + this.cardtype[i] + "_" + this.number[j] + ".png";
+            }
+        }
+        let rdi = this.getRandom(0, this.cardtype.length);
+        let rdj = this.getRandom(0, this.number.length);
+        return arr[rdi][rdj];
+    }
+
+    randomCard(id) {
+        sleep(100).then(() => {
+            document.getElementById(id).src = this.selectRandomCard();
+            sleep(100).then(() => {
+                document.getElementById(id).src = this.selectRandomCard();
+                sleep(100).then(() => {
+                    document.getElementById(id).src = this.selectRandomCard();
+                    sleep(100).then(() => {
+                        document.getElementById(id).src = this.selectRandomCard();
+                        sleep(100).then(() => {
+                            document.getElementById(id).src = this.selectRandomCard();
+                            sleep(100).then(() => {
+                                document.getElementById(id).src = this.selectRandomCard();
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    }
 
     winMoney() {
         let current = this.money + this.bet;
