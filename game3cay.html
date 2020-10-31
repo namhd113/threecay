@@ -74,6 +74,10 @@
 </div>
 
 <script>
+
+    if (!loadOldData('bet')) saveOldData("bet", 100);
+    if (!loadOldData('playerName')) saveOldData("playerName", "Bạn");
+
     var bet = document.getElementById("bet").value;
     if (bet == loadOldData('bet')) {
         saveOldData("bet", bet);
@@ -89,14 +93,14 @@
         document.getElementById("playerName").value = loadOldData("playerName");
     }
 
-    document.getElementById("VonDau").innerHTML = "Vốn ban đầu của " + loadOldData("playername") + " là: " + loadData(500) + "k";
+    document.getElementById("VonDau").innerHTML = "Vốn ban đầu của " + loadOldData("playerName") + " là: " + loadData(500) + "k";
     var diemPlayer = '';
-    var player = new PLay3Card(loadOldData('playername'), loadOldData('bet'), loadData(500));
+    var player = new PLay3Card(loadOldData('playerName'), loadOldData('bet'), loadData(500));
 
     if (!loadOldData('diemchucai') && loadOldData('diemplayer')) {
         diemPlayer = loadOldData('diemplayer');
         sleep(1000).then(() => {
-            document.getElementById("playerOutPut").innerHTML = "Điểm của " + loadOldData('playername') + " là: " + diemPlayer + " (" + JSON.parse(loadOldData("diemlist_card")) + ")";
+            document.getElementById("playerOutPut").innerHTML = "Điểm của " + loadOldData('playerName') + " là: " + diemPlayer + " (" + JSON.parse(loadOldData("diemlist_card")) + ")";
         });
         var listSelect = JSON.parse(loadOldData("diemplayer_card"));
         for (let i = 0; i < listSelect.length; i++) {
@@ -120,7 +124,7 @@
         }
 
         reset3cay();
-        player = new PLay3Card(loadOldData('playername'), loadOldData('bet'), loadData(500));
+        player = new PLay3Card(loadOldData('playerName'), loadOldData('bet'), loadData(500));
         diemPlayer = player.get3Card();
         saveOldData("diemplayer", diemPlayer);
         saveOldData("diemplayer_card", JSON.stringify(player.listSelect));
@@ -146,7 +150,7 @@
     }
 
     function setName() {
-        saveOldData("playername", document.getElementById("playerName").value);
+        saveOldData("playerName", document.getElementById("playerName").value);
     }
 
     function Master() {
@@ -197,7 +201,7 @@
     }
 
     function reset3cay() {
-        document.getElementById("VonDau").innerHTML = "Vốn ban đầu của " + loadOldData("playername") + " là: " + loadData(500) + "k";
+        document.getElementById("VonDau").innerHTML = "Vốn ban đầu của " + loadOldData("playerName") + " là: " + loadData(500) + "k";
         document.getElementById(1).src = "images/down-card.png";
         document.getElementById(2).src = "images/down-card.png";
         document.getElementById(3).src = "images/down-card.png";
