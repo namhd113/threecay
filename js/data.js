@@ -2,6 +2,14 @@ function saveData(data) {
     localStorage.setItem('money', data);
 }
 
+function loadData(m) {
+    if (localStorage.hasOwnProperty('money')) {
+        return +localStorage.getItem('money');
+    } else {
+        return m;
+    }
+}
+
 function saveOldData(key, data) {
     localStorage.setItem(key, data);
 }
@@ -12,14 +20,6 @@ function loadOldData(key) {
 
 function removeLocal(key) {
     localStorage.removeItem(key);
-}
-
-function loadData(m) {
-    if (localStorage.hasOwnProperty('money')) {
-        return +localStorage.getItem('money');
-    } else {
-        return m;
-    }
 }
 
 function resetMoney(m) {

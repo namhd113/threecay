@@ -94,9 +94,9 @@
         document.getElementById("playerName").value = loadOldData("playerName");
     }
 
-    document.getElementById("VonDau").innerHTML = "Vốn ban đầu của " + loadOldData("playerName") + " là: " + loadData(500) + "k";
+    document.getElementById("VonDau").innerHTML = "Vốn ban đầu của " + loadOldData("playerName") + " là: " + loadOldData('money') + "k";
     var diemPlayer = '';
-    var player = new PLay3Card(loadOldData('playerName'), loadOldData('bet'), loadData(500));
+    var player = new PLay3Card(loadOldData('playerName'), loadOldData('bet'), loadOldData('money'));
 
     if (!loadOldData('diemchucai') && loadOldData('diemplayer')) {
         diemPlayer = loadOldData('diemplayer');
@@ -110,12 +110,12 @@
     }
 
     function Open3Card() {
-        if (loadData(500) < loadOldData('bet')) {
+        if (loadOldData('money') < loadOldData('bet')) {
             alert("Bạn không đủ tiền đặt cược, không thể chơi tiếp.");
             return;
         }
 
-        if (loadData(500) <= 0) {
+        if (loadOldData('money') <= 0) {
             alert("Bạn hết tiền rồi, không thể chơi tiếp.");
             return;
         }
@@ -125,7 +125,7 @@
         }
 
         reset3cay();
-        player = new PLay3Card(loadOldData('playerName'), loadOldData('bet'), loadData(500));
+        player = new PLay3Card(loadOldData('playerName'), loadOldData('bet'), loadOldData('money'));
         diemPlayer = player.get3Card();
         saveOldData("diemplayer", diemPlayer);
         saveOldData("diemplayer_card", JSON.stringify(player.listSelect));
@@ -164,7 +164,7 @@
             alert("Người chơi cần mở bài trước.");
             return;
         }
-        if (loadData(500) <= 0) {
+        if (loadOldData('money') <= 0) {
             alert("Bạn hết tiền rồi!!!.");
             return;
         }
@@ -202,7 +202,7 @@
     }
 
     function reset3cay() {
-        document.getElementById("VonDau").innerHTML = "Vốn ban đầu của " + loadOldData("playerName") + " là: " + loadData(500) + "k";
+        document.getElementById("VonDau").innerHTML = "Vốn ban đầu của " + loadOldData("playerName") + " là: " + loadOldData('money') + "k";
         document.getElementById(1).src = "images/down-card.png";
         document.getElementById(2).src = "images/down-card.png";
         document.getElementById(3).src = "images/down-card.png";
