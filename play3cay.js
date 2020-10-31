@@ -87,19 +87,23 @@ class PLay3cay {
 
     changeImg(a, b, c) {
         if (this.name == "Chủ cái") {
-            document.getElementById(4).src = a;
-            sleep(1000).then(() => {
-                document.getElementById(5).src = b;
+            sleep(500).then(() => {
+                document.getElementById(4).src = a;
                 sleep(1000).then(() => {
-                    document.getElementById(6).src = c;
+                    document.getElementById(5).src = b;
+                    sleep(1000).then(() => {
+                        document.getElementById(6).src = c;
+                    });
                 });
             });
         } else {
-            document.getElementById(1).src = a;
-            sleep(1000).then(() => {
-                document.getElementById(2).src = b;
+            sleep(500).then(() => {
+                document.getElementById(1).src = a;
                 sleep(1000).then(() => {
-                    document.getElementById(3).src = c;
+                    document.getElementById(2).src = b;
+                    sleep(1000).then(() => {
+                        document.getElementById(3).src = c;
+                    });
                 });
             });
         }

@@ -9,19 +9,11 @@ function choi3cay() {
         return;
     }
 
-    document.getElementById(1).src = "images/down-card.png";
-    document.getElementById(2).src = "images/down-card.png";
-    document.getElementById(3).src = "images/down-card.png";
-    document.getElementById(4).src = "images/down-card.png";
-    document.getElementById(5).src = "images/down-card.png";
-    document.getElementById(6).src = "images/down-card.png";
-    document.getElementById("res").innerHTML = "";
-    document.getElementById("bet_res").innerHTML = "";
-    document.getElementById("chucaioutput").innerHTML = "";
-    document.getElementById("playeroutput").innerHTML = "";
+    reset3cay();
 
     let playerName = document.getElementById("playerName").value;
     let bet = document.getElementById("bet").value;
+
     player = new PLay3cay(playerName, bet, loadData(500));
     diemPlayer = player.get3Bai();
     document.getElementById("VonDau").innerHTML = "Vốn ban đầu của " + player.name + " là: " + player.money + "k";
