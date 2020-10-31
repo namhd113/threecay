@@ -77,6 +77,7 @@
 
     if (!loadOldData('bet')) saveOldData("bet", 100);
     if (!loadOldData('playerName')) saveOldData("playerName", "Bạn");
+    if (!loadOldData('money')) saveOldData('money',500);
 
     var bet = document.getElementById("bet").value;
     if (bet == loadOldData('bet')) {

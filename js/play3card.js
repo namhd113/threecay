@@ -160,13 +160,13 @@ class PLay3Card {
 
     winMoney() {
         let current = this.money + this.bet;
-        saveData(current);
+        saveOldData('money', current);
         return current;
     }
 
     lostMoney() {
         let current = this.money - this.bet;
-        saveData(current);
+        saveOldData('money', current);
         return current;
     }
 }
