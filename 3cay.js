@@ -1,3 +1,4 @@
+document.getElementById("VonDau").innerHTML = "Vốn ban đầu: " + loadData(500) + "k";
 var diemPlayer = '';
 var player = '';
 
@@ -8,6 +9,9 @@ function choi3cay() {
         return;
     }
 
+    document.getElementById(1).src = "images/down-card.png";
+    document.getElementById(2).src = "images/down-card.png";
+    document.getElementById(3).src = "images/down-card.png";
     document.getElementById(4).src = "images/down-card.png";
     document.getElementById(5).src = "images/down-card.png";
     document.getElementById(6).src = "images/down-card.png";
@@ -21,7 +25,13 @@ function choi3cay() {
     player = new PLay3cay(playerName, bet, loadData(500));
     diemPlayer = player.get3Bai();
     document.getElementById("VonDau").innerHTML = "Vốn ban đầu của " + player.name + " là: " + player.money + "k";
-    document.getElementById("playeroutput").innerHTML = "Điểm của " + player.name + " là: " + diemPlayer + " (" + player.list + ")";
+    sleep(3000).then(() => {
+        document.getElementById("playeroutput").innerHTML = "Điểm của " + player.name + " là: " + diemPlayer + " (" + player.list + ")";
+    });
+}
+
+function sleep(time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
 }
 
 function chucai() {
@@ -39,24 +49,29 @@ function chucai() {
     let chuCaiPlay = new PLay3cay("Chủ cái");
     let diemChucai = chuCaiPlay.get3Bai(player.listSelect);
 
-    document.getElementById("chucaioutput").innerHTML = "Điểm của " + chuCaiPlay.name + " là: " + diemChucai + " (" + chuCaiPlay.list + ")";
+    sleep(3000).then(() => {
+        document.getElementById("chucaioutput").innerHTML = "Điểm của " + chuCaiPlay.name + " là: " + diemChucai + " (" + chuCaiPlay.list + ")";
+    });
 
     if (diemChucai > diemPlayer) {
-        document.getElementById("res").innerHTML = chuCaiPlay.name + " thắng rồi !!!";
-        document.getElementById("bet_res").innerHTML = "Bạn đặt cược " + player.bet + "k. Số tiền còn lại là: " + player.lostMoney() + "k";
-
+        sleep(4000).then(() => {
+            document.getElementById("res").innerHTML = chuCaiPlay.name + " thắng rồi !!!";
+            document.getElementById("bet_res").innerHTML = "Bạn đặt cược " + player.bet + "k. Số tiền còn lại là: " + player.lostMoney() + "k";
+        });
     }
     if (diemChucai < diemPlayer) {
-        document.getElementById("res").innerHTML = player.name + " thắng rồi !!!";
-        document.getElementById("bet_res").innerHTML = "Bạn đặt cược " + player.bet + "k. Số tiền còn lại là: " + player.winMoney() + "k";
+        sleep(4000).then(() => {
+            document.getElementById("res").innerHTML = player.name + " thắng rồi !!!";
+            document.getElementById("bet_res").innerHTML = "Bạn đặt cược " + player.bet + "k. Số tiền còn lại là: " + player.winMoney() + "k";
+        });
     }
     if (diemChucai == diemPlayer) {
-        document.getElementById("res").innerHTML = "Hoà rồi";
-        document.getElementById("bet_res").innerHTML = "Bạn không mất thêm gi cả.";
+        sleep(4000).then(() => {
+            document.getElementById("res").innerHTML = "Hoà rồi";
+            document.getElementById("bet_res").innerHTML = "Bạn không mất thêm gi cả.";
+        });
     }
 }
-
-document.getElementById("VonDau").innerHTML = "Vốn ban đầu: " + loadData(500) + "k";
 
 function reset3cay() {
     document.getElementById(1).src = "images/down-card.png";

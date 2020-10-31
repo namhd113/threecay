@@ -88,14 +88,23 @@ class PLay3cay {
     changeImg(a, b, c) {
         if (this.name == "Chủ cái") {
             document.getElementById(4).src = a;
-            document.getElementById(5).src = b;
-            document.getElementById(6).src = c;
+            sleep(1000).then(() => {
+                document.getElementById(5).src = b;
+                sleep(1000).then(() => {
+                    document.getElementById(6).src = c;
+                });
+            });
         } else {
             document.getElementById(1).src = a;
-            document.getElementById(2).src = b;
-            document.getElementById(3).src = c;
+            sleep(1000).then(() => {
+                document.getElementById(2).src = b;
+                sleep(1000).then(() => {
+                    document.getElementById(3).src = c;
+                });
+            });
         }
     }
+
 
     winMoney() {
         let current = this.money + this.bet;
