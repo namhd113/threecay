@@ -27,9 +27,7 @@ class PLay3cay {
         if (rd1 == rdi && rd2 == rdj) {
             return this.selectCard(rdi, rdj);
         }
-
         this.listSelect.push(rdi + "," + rdj);
-
         return [arr[rdi][rdj], rdi, rdj];
     }
 

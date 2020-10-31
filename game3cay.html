@@ -5,9 +5,6 @@
     <title>Title</title>
 
     <style>
-        div {
-            display: inline-block;
-        }
 
         img.one {
             height: 10%;
@@ -33,35 +30,26 @@
 
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-    <script src="data.js"></script>
-    <script src="3cay.js"></script>
-    <script src="play3cay.js"></script>
 
 </head>
 <body>
 
-
-<br>
 <div>
-    <h3 style="color:red;">Nhập tên người chơi:</h3> <input type="text" id="player2">
-    <button onclick="resetMoney()">Reset tiền chơi</button>
+    <h3 style="color:red;">Nhập tên người chơi:</h3> <input type="text" id="playerName">
+    <button onclick="resetMoney(500)">Reset tiền chơi</button>
     <button onclick="reset3cay()">Reset lá bài</button>
     <h3 style="color:red;">Đặt cược</h3>
     <select id="bet">
         <option value="10">10k</option>
         <option value="20">20k</option>
-        <option value="100">100k</option>
+        <option value="100" selected>100k</option>
         <option value="500">500k</option>
     </select>
     <br>
-<!--    <h3 style="color:red;" id="vonbandau"></h3>-->
     <h3 style="color:red;" id="VonDau"></h3>
     <br>
 
@@ -84,20 +72,14 @@
 
     <h3>
         <p style="color:#ccffcc;" id="res"></p>
-        <p style="color:#ccffcc;" id="res2"></p>
-        <p style="color:#ccffcc;" id="res1"></p>
         <p style="color:#ccffcc;" id="bet_res"></p>
     </h3>
 
 </div>
-<br>
-<br>
-<br>
-<script>
-    document.getElementById("VonDau").innerHTML = "Vốn ban đầu: " + loadData(500) + "k";
 
-</script>
-
+<script src="data.js"></script>
+<script src="play3cay.js"></script>
+<script src="3cay.js"></script>
 
 </body>
 </html>
