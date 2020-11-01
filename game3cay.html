@@ -41,7 +41,7 @@
 <body>
 
 <div>
-    <p style="color:red;">Nhập tên người chơi:</p> <input type="text" id="playerName" onchange="setName()">
+    <p style="color:red;">Nhập tên người chơi:</p> <input type="text" id="playerName" oninput="setName()" onchange="setName()">
     <button onclick="resetMoney(500)">Reset tiền chơi</button>
     <button onclick="reset3cay()">Reset lá bài</button>
     <p style="color:red;">Đặt cược</p>
@@ -54,15 +54,15 @@
     </select>
     <p style="color:red;" id="VonDau"></p>
 
-    <img class="one" src="images/down-card.png" id="1" width="300px" height="350px">
-    <img class="two" src="images/down-card.png" id="2" width="300px" height="350px">
-    <img class="three" src="images/down-card.png" id="3" width="300px" height="350px">
+    <img class="one" src="images/down-card.png" id="1">
+    <img class="two" src="images/down-card.png" id="2">
+    <img class="three" src="images/down-card.png" id="3">
     <button onclick="Open3Card()"><h4>Mở bài.</h4></button>
     <h3 style="color:red;" id="playerOutPut"></h3>
 
-    <img class="one" src="images/down-card.png" id="4" width="300px" height="350px">
-    <img class="two" src="images/down-card.png" id="5" width="300px" height="350px">
-    <img class="three" src="images/down-card.png" id="6" width="300px" height="350px">
+    <img class="one" src="images/down-card.png" id="4">
+    <img class="two" src="images/down-card.png" id="5">
+    <img class="three" src="images/down-card.png" id="6">
     <button onclick="Master()"><h4>Chủ cái mở bài.</h4></button>
     <h3 style="color:#ffff66;" id="chuCaiOutPut"></h3>
 
