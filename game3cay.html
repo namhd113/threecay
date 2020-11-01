@@ -104,12 +104,12 @@
     }
 
     function Open3Card() {
-        if (loadOldData('money') < loadOldData('bet')) {
+        if (+loadOldData('money') < +loadOldData('bet')) {
             alert("Bạn không đủ tiền đặt cược, không thể chơi tiếp.");
             return;
         }
 
-        if (loadOldData('money') <= 0) {
+        if (+loadOldData('money') <= 0) {
             alert("Bạn hết tiền rồi, không thể chơi tiếp.");
             return;
         }
@@ -158,7 +158,7 @@
             alert("Người chơi cần mở bài trước.");
             return;
         }
-        if (loadOldData('money') <= 0) {
+        if (+loadOldData('money') <= 0) {
             alert("Bạn hết tiền rồi!!!.");
             return;
         }
@@ -213,4 +213,4 @@
 
 
 </body>
-</html>
+</html> 
