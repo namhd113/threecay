@@ -80,16 +80,10 @@
     if (!loadOldData('money')) saveOldData('money',500);
 
     var bet = document.getElementById("bet").value;
-    if (bet == loadOldData('bet')) {
-        saveOldData("bet", bet);
-    }
     if (bet != loadOldData('bet')) {
         document.getElementById("bet").value = loadOldData("bet");
     }
     var playerName = document.getElementById("playerName").value;
-    if (playerName == loadOldData('playerName')) {
-        saveOldData("playerName", playerName);
-    }
     if (playerName != loadOldData('playerName')) {
         document.getElementById("playerName").value = loadOldData("playerName");
     }
